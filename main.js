@@ -59,9 +59,8 @@ function setConditions () {
     let coorTo = boxTo.split(',')
 
     let currentBoxFrom = boxes[ coorFrom[0] ][ coorFrom[1] ].condition
-    let currentBoxTo = boxes[ coorTo[0] ][ coorTo[1] ].condition
-    
-    if (currentBoxFrom === '' && currentBoxTo === '') {
+    // let currentBoxTo = boxes[ coorTo[0] ][ coorTo[1] ].condition
+    if (!currentBoxFrom.split(' ').includes('to')) {
       conditionValue[type].push({
         text: `${origin}->${target}`,
         coordinate: {
@@ -71,10 +70,8 @@ function setConditions () {
       })
       boxes[ coorFrom[0] ][ coorFrom[1] ].condition = `${type} to ${target}`
       boxes[ coorTo[0] ][ coorTo[1] ].condition = `${type} from ${origin}`
-    } else if (currentBoxFrom !== '') {
+    } else {
       alert(`Terdapat fungsi pada box no ${origin}`)
-    } else if (currentBoxTo !== '') {
-      alert(`Terdapat fungsi pada box no ${target}`)
     }
 
     render()
