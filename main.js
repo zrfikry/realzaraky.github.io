@@ -58,23 +58,26 @@ function setConditions () {
     let coorFrom = boxFrom.split(',')
     let coorTo = boxTo.split(',')
 
-    let currentBoxFrom = boxes[ coorFrom[0] ][ coorFrom[1] ].condition
-    // let currentBoxTo = boxes[ coorTo[0] ][ coorTo[1] ].condition
-    if (!currentBoxFrom.split(' ').includes('to')) {
-      conditionValue[type].push({
-        text: `${origin}->${target}`,
-        coordinate: {
-          from: boxFrom,
-          to: boxTo
-        }
-      })
-      boxes[ coorFrom[0] ][ coorFrom[1] ].condition = `${type} to ${target}`
-      boxes[ coorTo[0] ][ coorTo[1] ].condition = `${type} from ${origin}`
+    if (origin < 1 || origin > 25 || target < 1 || target > 25) {
+      alert(`Hanya bisa set fungsi diantara box 1 hingga ${dimension * dimension}`)
     } else {
-      alert(`Terdapat fungsi pada box no ${origin}`)
+      let currentBoxFrom = boxes[ coorFrom[0] ][ coorFrom[1] ].condition
+      // let currentBoxTo = boxes[ coorTo[0] ][ coorTo[1] ].condition
+      if (!currentBoxFrom.split(' ').includes('to')) {
+        conditionValue[type].push({
+          text: `${origin}->${target}`,
+          coordinate: {
+            from: boxFrom,
+            to: boxTo
+          }
+        })
+        boxes[ coorFrom[0] ][ coorFrom[1] ].condition = `${type} to ${target}`
+        boxes[ coorTo[0] ][ coorTo[1] ].condition = `${type} from ${origin}`
+      } else {
+        alert(`Terdapat fungsi pada box no ${origin}`)
+      }
+      render()
     }
-
-    render()
   }
 }
 
